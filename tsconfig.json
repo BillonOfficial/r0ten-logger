@@ -1,0 +1,29 @@
+{
+    "compilerOptions": {
+        "allowJs": false,
+        "declaration": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "forceConsistentCasingInFileNames": true,
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitAny": true,
+        "noImplicitReturns": true,
+        "outDir": "./dist",
+        "preserveConstEnums": true,
+        "removeComments": true,
+        "rootDir": ".",
+        "sourceMap": true,
+        "strictNullChecks": true,
+        "target": "es6",
+        "types": ["node"]
+    },
+    "exclude": [
+        "node_modules",
+        "dist"
+    ],
+    "atom": {
+        "rewriteTsconfig": false
+    }
+}
