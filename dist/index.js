@@ -39,7 +39,33 @@ class Logger {
         return {
             emailErrors: {
                 active: false,
-                nodemailer: {},
+                nodemailer: {
+                    from() {
+                        return __awaiter(this, void 0, void 0, function* () {
+                            return "";
+                        });
+                    },
+                    to() {
+                        return __awaiter(this, void 0, void 0, function* () {
+                            return "";
+                        });
+                    },
+                    smtps() {
+                        return __awaiter(this, void 0, void 0, function* () {
+                            return "";
+                        });
+                    },
+                    subject() {
+                        return __awaiter(this, void 0, void 0, function* () {
+                            return "";
+                        });
+                    },
+                    html() {
+                        return __awaiter(this, void 0, void 0, function* () {
+                            return "";
+                        });
+                    },
+                },
                 trackErrorsInterval: importer_1.ms("15m"),
             },
             sails: sailsObject,

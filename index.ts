@@ -44,11 +44,27 @@ export class Logger {
         return "::";
     }
 
-    public static defaultConfig() {
+    public static defaultConfig(): LoggerConfig {
         return {
             emailErrors: {
                 active: false,
-                nodemailer: {},
+                nodemailer: {
+                    async from() {
+                        return "";
+                    },
+                    async to() {
+                        return "";
+                    },
+                    async smtps() {
+                        return "";
+                    },
+                    async subject() {
+                        return "";
+                    },
+                    async html() {
+                        return "";
+                    },
+                },
                 trackErrorsInterval: ms("15m"),
             },
             sails: sailsObject,

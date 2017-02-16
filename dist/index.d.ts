@@ -21,14 +21,7 @@ export interface LoggerConfig {
 }
 export declare class Logger {
     static readonly splitter: string;
-    static defaultConfig(): {
-        emailErrors: {
-            active: boolean;
-            nodemailer: {};
-            trackErrorsInterval: number;
-        };
-        sails: {};
-    };
+    static defaultConfig(): LoggerConfig;
     private static errorStack;
     static trackErrors(): Promise<void>;
     private static transporter;
