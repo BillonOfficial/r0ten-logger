@@ -1,6 +1,6 @@
 /* tslint:disable:max-line-length */
 import {
-    S, _, util, i18n,
+    S, _, util, i18n, nodemailer, ms,
 } from "./importer";
 /* tslint:enable:max-line-length */
 
@@ -24,9 +24,68 @@ export interface OptionalTranslateInterface extends i18n.TranslateOptions {
 
 export const logIgnoreDetectingOptionsSymbol = Symbol("ignore detecting options");
 
+export interface LoggerConfig {
+    emailErrors: {
+        active: boolean;
+        nodemailer: {
+            from: (errors: string[]) => Promise<string>;
+            to: (errors: string[]) => Promise<string>;
+            smtps: (errors: string[]) => Promise<string>;
+            subject: (errors: string[]) => Promise<string>;
+            html: (errors: string[]) => Promise<string>;
+        };
+        trackErrorsInterval: number;
+    },
+}
+
 export class Logger {
     public static get splitter() {
         return "::";
+    }
+
+    public static defaultConfig() {
+        return {
+            emailErrors: {
+                active: false,
+                nodemailer: {},
+                trackErrorsInterval: ms("15m"),
+            },
+        };
+    }
+
+    private static errorStack: string[] = [];
+    public static async trackErrors() {
+        const emailErrors = Logger.config.emailErrors;
+        if (!emailErrors.active) {
+            throw new Error(`To track errors r0ten-logger must have defined config.emailErrors.`);
+        }
+
+        setInterval(async () => {
+            if (Logger.errorStack.length > 0) {
+                Logger.transporter.sendMail({
+                    html: await emailErrors.nodemailer.html(Logger.errorStack),
+                    subject: await emailErrors.nodemailer.subject(Logger.errorStack),
+                    to: await emailErrors.nodemailer.to(Logger.errorStack),
+                    from: await emailErrors.nodemailer.from(Logger.errorStack),
+                });
+
+                Logger.errorStack = [];
+            }
+        }, emailErrors.trackErrorsInterval);
+    }
+
+    private static transporter: nodemailer.Transporter;
+
+    private static _config: LoggerConfig;
+    public static get config() {
+        return this._config;
+    }
+
+    public static setConfig(options: LoggerConfig) {
+        this._config = _.defaults(options || {}, Logger.defaultConfig());
+        if (this._config.emailErrors) {
+            Logger.transporter = nodemailer.createTransport(this._config.emailErrors.nodemailer.smtps);
+        }
     }
 
     public static sails: any = sailsObject;
@@ -96,6 +155,18 @@ export class Logger {
     }
 
     public error(...args: any[]) {
+        if (Logger.config.emailErrors) {
+            const stringErrors: string[] = _.map(args, (object: any) => {
+                if (typeof object !== "string") {
+                    object = JSON.stringify(object);
+                }
+
+                return object;
+            });
+
+            Logger.errorStack.push(...stringErrors);
+        }
+
         return this.sailsLog("error", ...args);
     }
 

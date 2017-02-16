@@ -5,8 +5,34 @@ export interface OptionalTranslateInterface extends i18n.TranslateOptions {
     phrase: any;
 }
 export declare const logIgnoreDetectingOptionsSymbol: symbol;
+export interface LoggerConfig {
+    emailErrors: {
+        active: boolean;
+        nodemailer: {
+            from: (errors: string[]) => Promise<string>;
+            to: (errors: string[]) => Promise<string>;
+            smtps: (errors: string[]) => Promise<string>;
+            subject: (errors: string[]) => Promise<string>;
+            html: (errors: string[]) => Promise<string>;
+        };
+        trackErrorsInterval: number;
+    };
+}
 export declare class Logger {
     static readonly splitter: string;
+    static defaultConfig(): {
+        emailErrors: {
+            active: boolean;
+            nodemailer: {};
+            trackErrorsInterval: number;
+        };
+    };
+    private static errorStack;
+    static trackErrors(): Promise<void>;
+    private static transporter;
+    private static _config;
+    static readonly config: LoggerConfig;
+    static setConfig(options: LoggerConfig): void;
     static sails: any;
     static readonly translateDefaults: i18n.TranslateOptions;
     static humanizeTranslate(options?: i18n.TranslateOptions | string): string;

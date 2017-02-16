@@ -2,6 +2,10 @@
 # yarn lockfile v1
 
 
+"@types/bluebird@*":
+  version "3.0.37"
+  resolved "https://registry.yarnpkg.com/@types/bluebird/-/bluebird-3.0.37.tgz#2e76b394aa9bea40d04241a31c0887a260283388"
+
 "@types/i18n@^0.5.20":
   version "0.5.20"
   resolved "https://registry.yarnpkg.com/@types/i18n/-/i18n-0.5.20.tgz#5fda4ce374023810cd41ded099d1905e90ed86af"
@@ -10,9 +14,35 @@
   version "4.14.50"
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.50.tgz#2227da4d65fafe249bccd59c7b9396e27674c8f7"
 
-"@types/node@^7.0.4":
+"@types/ms@^0.7.29":
+  version "0.7.29"
+  resolved "https://registry.yarnpkg.com/@types/ms/-/ms-0.7.29.tgz#05551d5bd6817877fa01a1fed0af2f28b9ec811d"
+
+"@types/node@*", "@types/node@^7.0.4":
   version "7.0.4"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-7.0.4.tgz#9aabc135979ded383325749f508894c662948c8b"
+
+"@types/nodemailer-direct-transport@*":
+  version "1.0.29"
+  resolved "https://registry.yarnpkg.com/@types/nodemailer-direct-transport/-/nodemailer-direct-transport-1.0.29.tgz#0247bb4734f8bbf9398241b16b41022e1303ddf1"
+  dependencies:
+    "@types/nodemailer" "*"
+
+"@types/nodemailer-smtp-transport@*":
+  version "1.0.29"
+  resolved "https://registry.yarnpkg.com/@types/nodemailer-smtp-transport/-/nodemailer-smtp-transport-1.0.29.tgz#46d71e4e23a526bd32ddf449613b58896b1e3164"
+  dependencies:
+    "@types/node" "*"
+    "@types/nodemailer" "*"
+
+"@types/nodemailer@*", "@types/nodemailer@^1.3.32":
+  version "1.3.32"
+  resolved "https://registry.yarnpkg.com/@types/nodemailer/-/nodemailer-1.3.32.tgz#76388aa9389a9290416c98eafd7d24d80efa2333"
+  dependencies:
+    "@types/bluebird" "*"
+    "@types/node" "*"
+    "@types/nodemailer-direct-transport" "*"
+    "@types/nodemailer-smtp-transport" "*"
 
 "@types/string@^0.0.28":
   version "0.0.28"
@@ -163,13 +193,17 @@ minimist@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.0.tgz#a35008b20f41383eec1fb914f4cd5df79a264284"
 
-ms@0.7.2:
+ms@0.7.2, ms@^0.7.2:
   version "0.7.2"
   resolved "https://registry.yarnpkg.com/ms/-/ms-0.7.2.tgz#ae25cf2512b3885a1d95d7f037868d8431124765"
 
 mustache@*:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/mustache/-/mustache-2.3.0.tgz#4028f7778b17708a489930a6e52ac3bca0da41d0"
+
+nodemailer@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/nodemailer/-/nodemailer-3.1.1.tgz#cdddb64d86387f902542307b4d92ea00140445a1"
 
 nopt@~3.0.6:
   version "3.0.6"

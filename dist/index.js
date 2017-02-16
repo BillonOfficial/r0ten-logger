@@ -1,4 +1,12 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 const importer_1 = require("./importer");
 let sailsObject;
 if (typeof sails !== "undefined") {
@@ -26,6 +34,43 @@ class Logger {
     }
     static get splitter() {
         return "::";
+    }
+    static defaultConfig() {
+        return {
+            emailErrors: {
+                active: false,
+                nodemailer: {},
+                trackErrorsInterval: importer_1.ms("15m"),
+            },
+        };
+    }
+    static trackErrors() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const emailErrors = Logger.config.emailErrors;
+            if (!emailErrors.active) {
+                throw new Error(`To track errors r0ten-logger must have defined config.emailErrors.`);
+            }
+            setInterval(() => __awaiter(this, void 0, void 0, function* () {
+                if (Logger.errorStack.length > 0) {
+                    Logger.transporter.sendMail({
+                        html: yield emailErrors.nodemailer.html(Logger.errorStack),
+                        subject: yield emailErrors.nodemailer.subject(Logger.errorStack),
+                        to: yield emailErrors.nodemailer.to(Logger.errorStack),
+                        from: yield emailErrors.nodemailer.from(Logger.errorStack),
+                    });
+                    Logger.errorStack = [];
+                }
+            }), emailErrors.trackErrorsInterval);
+        });
+    }
+    static get config() {
+        return this._config;
+    }
+    static setConfig(options) {
+        this._config = importer_1._.defaults(options || {}, Logger.defaultConfig());
+        if (this._config.emailErrors) {
+            Logger.transporter = importer_1.nodemailer.createTransport(this._config.emailErrors.nodemailer.smtps);
+        }
     }
     static get translateDefaults() {
         return {
@@ -68,6 +113,15 @@ class Logger {
         return this.sailsLog("debug", ...args);
     }
     error(...args) {
+        if (Logger.config.emailErrors) {
+            const stringErrors = importer_1._.map(args, (object) => {
+                if (typeof object !== "string") {
+                    object = JSON.stringify(object);
+                }
+                return object;
+            });
+            Logger.errorStack.push(...stringErrors);
+        }
         return this.sailsLog("error", ...args);
     }
     warn(...args) {
@@ -145,6 +199,7 @@ class Logger {
         });
     }
 }
+Logger.errorStack = [];
 Logger.sails = sailsObject;
 exports.Logger = Logger;
 //# sourceMappingURL=index.js.map
