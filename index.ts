@@ -28,9 +28,9 @@ export interface LoggerConfig {
     emailErrors: {
         active: boolean;
         nodemailer: {
+            smtps: string;
             from: (errors: string[]) => Promise<string>;
             to: (errors: string[]) => Promise<string>;
-            smtps: (errors: string[]) => Promise<string>;
             subject: (errors: string[]) => Promise<string>;
             html: (errors: string[]) => Promise<string>;
         };
@@ -49,13 +49,11 @@ export class Logger {
             emailErrors: {
                 active: false,
                 nodemailer: {
+                    smtps: "",
                     async from(errors) {
                         return "";
                     },
                     async to(errors) {
-                        return "";
-                    },
-                    async smtps(errors) {
                         return "";
                     },
                     async subject(errors) {
@@ -101,7 +99,6 @@ export class Logger {
 
     public static setConfig(options: LoggerConfig) {
         this._config = _.defaults(options || {}, Logger.defaultConfig());
-        console.log(this._config);
         if (this._config.emailErrors) {
             Logger.transporter = nodemailer.createTransport(this._config.emailErrors.nodemailer.smtps);
         }

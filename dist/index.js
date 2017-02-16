@@ -40,17 +40,13 @@ class Logger {
             emailErrors: {
                 active: false,
                 nodemailer: {
+                    smtps: "",
                     from(errors) {
                         return __awaiter(this, void 0, void 0, function* () {
                             return "";
                         });
                     },
                     to(errors) {
-                        return __awaiter(this, void 0, void 0, function* () {
-                            return "";
-                        });
-                    },
-                    smtps(errors) {
                         return __awaiter(this, void 0, void 0, function* () {
                             return "";
                         });
@@ -95,7 +91,6 @@ class Logger {
     }
     static setConfig(options) {
         this._config = importer_1._.defaults(options || {}, Logger.defaultConfig());
-        console.log(this._config);
         if (this._config.emailErrors) {
             Logger.transporter = importer_1.nodemailer.createTransport(this._config.emailErrors.nodemailer.smtps);
         }

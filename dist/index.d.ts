@@ -9,9 +9,9 @@ export interface LoggerConfig {
     emailErrors: {
         active: boolean;
         nodemailer: {
+            smtps: string;
             from: (errors: string[]) => Promise<string>;
             to: (errors: string[]) => Promise<string>;
-            smtps: (errors: string[]) => Promise<string>;
             subject: (errors: string[]) => Promise<string>;
             html: (errors: string[]) => Promise<string>;
         };
