@@ -101,6 +101,7 @@ export class Logger {
 
     public static setConfig(options: LoggerConfig) {
         this._config = _.defaults(options || {}, Logger.defaultConfig());
+        console.log(this._config);
         if (this._config.emailErrors) {
             Logger.transporter = nodemailer.createTransport(this._config.emailErrors.nodemailer.smtps);
         }
