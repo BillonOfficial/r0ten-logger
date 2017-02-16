@@ -49,19 +49,19 @@ export class Logger {
             emailErrors: {
                 active: false,
                 nodemailer: {
-                    async from() {
+                    async from(errors) {
                         return "";
                     },
-                    async to() {
+                    async to(errors) {
                         return "";
                     },
-                    async smtps() {
+                    async smtps(errors) {
                         return "";
                     },
-                    async subject() {
+                    async subject(errors) {
                         return "";
                     },
-                    async html() {
+                    async html(errors) {
                         return "";
                     },
                 },
@@ -296,3 +296,5 @@ export class Logger {
     }
 
 }
+
+export default Logger;

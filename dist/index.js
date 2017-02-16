@@ -40,27 +40,27 @@ class Logger {
             emailErrors: {
                 active: false,
                 nodemailer: {
-                    from() {
+                    from(errors) {
                         return __awaiter(this, void 0, void 0, function* () {
                             return "";
                         });
                     },
-                    to() {
+                    to(errors) {
                         return __awaiter(this, void 0, void 0, function* () {
                             return "";
                         });
                     },
-                    smtps() {
+                    smtps(errors) {
                         return __awaiter(this, void 0, void 0, function* () {
                             return "";
                         });
                     },
-                    subject() {
+                    subject(errors) {
                         return __awaiter(this, void 0, void 0, function* () {
                             return "";
                         });
                     },
-                    html() {
+                    html(errors) {
                         return __awaiter(this, void 0, void 0, function* () {
                             return "";
                         });
@@ -230,4 +230,6 @@ class Logger {
 Logger.errorStack = [];
 Logger.sails = sailsObject;
 exports.Logger = Logger;
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = Logger;
 //# sourceMappingURL=index.js.map

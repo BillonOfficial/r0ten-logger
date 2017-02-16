@@ -53,3 +53,4 @@ export declare class Logger {
     private parseArgumentsToTranslateInterface(...args);
     private translateArr(args);
 }
+export default Logger;
