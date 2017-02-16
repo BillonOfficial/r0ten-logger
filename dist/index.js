@@ -42,6 +42,7 @@ class Logger {
                 nodemailer: {},
                 trackErrorsInterval: importer_1.ms("15m"),
             },
+            sails: sailsObject,
         };
     }
     static trackErrors() {
@@ -71,6 +72,7 @@ class Logger {
         if (this._config.emailErrors) {
             Logger.transporter = importer_1.nodemailer.createTransport(this._config.emailErrors.nodemailer.smtps);
         }
+        this.sails = this._config.sails;
     }
     static get translateDefaults() {
         return {

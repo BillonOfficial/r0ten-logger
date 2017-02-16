@@ -17,6 +17,7 @@ export interface LoggerConfig {
         };
         trackErrorsInterval: number;
     };
+    sails: any;
 }
 export declare class Logger {
     static readonly splitter: string;
@@ -26,6 +27,7 @@ export declare class Logger {
             nodemailer: {};
             trackErrorsInterval: number;
         };
+        sails: {};
     };
     private static errorStack;
     static trackErrors(): Promise<void>;

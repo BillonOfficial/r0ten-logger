@@ -36,6 +36,7 @@ export interface LoggerConfig {
         };
         trackErrorsInterval: number;
     },
+    sails: any,
 }
 
 export class Logger {
@@ -50,6 +51,7 @@ export class Logger {
                 nodemailer: {},
                 trackErrorsInterval: ms("15m"),
             },
+            sails: sailsObject,
         };
     }
 
@@ -86,6 +88,8 @@ export class Logger {
         if (this._config.emailErrors) {
             Logger.transporter = nodemailer.createTransport(this._config.emailErrors.nodemailer.smtps);
         }
+
+        this.sails = this._config.sails;
     }
 
     public static sails: any = sailsObject;
