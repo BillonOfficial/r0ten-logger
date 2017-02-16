@@ -71,7 +71,7 @@ class Logger {
         return __awaiter(this, void 0, void 0, function* () {
             const emailErrors = Logger.config.emailErrors;
             if (!emailErrors.active) {
-                throw new Error(`To track errors r0ten-logger must have defined config.emailErrors.`);
+                return;
             }
             setInterval(() => __awaiter(this, void 0, void 0, function* () {
                 if (Logger.errorStack.length > 0) {

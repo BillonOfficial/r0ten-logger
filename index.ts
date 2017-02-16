@@ -73,7 +73,7 @@ export class Logger {
     public static async trackErrors() {
         const emailErrors = Logger.config.emailErrors;
         if (!emailErrors.active) {
-            throw new Error(`To track errors r0ten-logger must have defined config.emailErrors.`);
+            return;
         }
 
         setInterval(async () => {
