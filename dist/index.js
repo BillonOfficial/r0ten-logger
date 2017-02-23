@@ -144,7 +144,7 @@ class Logger {
                 }
                 return object;
             });
-            Logger.errorStack.push(...stringErrors);
+            Logger.errorStack.push(this.path.join(` ${Logger.splitter} `), ...stringErrors);
         }
         return this.sailsLog("error", ...args);
     }
