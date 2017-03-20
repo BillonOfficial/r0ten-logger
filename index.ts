@@ -1,6 +1,6 @@
 /* tslint:disable:max-line-length */
 import {
-    S, _, util, i18n, nodemailer, ms,
+    S, _, util, i18n, nodemailer, ms, CircularJSON,
 } from "./importer";
 /* tslint:enable:max-line-length */
 
@@ -176,7 +176,7 @@ export class Logger {
         if (Logger.config.emailErrors) {
             const stringErrors: string[] = _.map(args, (object: any) => {
                 if (typeof object !== "string") {
-                    object = JSON.stringify(object);
+                    object = CircularJSON.stringify(object);
                 }
 
                 return object;
