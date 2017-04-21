@@ -6,10 +6,6 @@
   version "3.0.37"
   resolved "https://registry.yarnpkg.com/@types/bluebird/-/bluebird-3.0.37.tgz#2e76b394aa9bea40d04241a31c0887a260283388"
 
-"@types/circular-json@^0.1.30":
-  version "0.1.30"
-  resolved "https://registry.yarnpkg.com/@types/circular-json/-/circular-json-0.1.30.tgz#9dea3974ae28b9aa87fa2cf23106bcd0a3e9329e"
-
 "@types/i18n@^0.5.20":
   version "0.5.20"
   resolved "https://registry.yarnpkg.com/@types/i18n/-/i18n-0.5.20.tgz#5fda4ce374023810cd41ded099d1905e90ed86af"
