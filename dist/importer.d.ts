@@ -4,3 +4,4 @@ export import S = require("string");
 export import util = require("util");
 export import nodemailer = require("nodemailer");
 export import ms = require("ms");
+export import CircularJSON = require("circular-json");
