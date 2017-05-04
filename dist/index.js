@@ -136,7 +136,7 @@ class Logger {
     log(...args) {
         return this.sailsLog("debug", ...args);
     }
-    error(...args) {
+    critical(...args) {
         if (Logger.config.emailErrors) {
             const stringErrors = importer_1._.map(args, (object) => {
                 if (typeof object !== "string") {
@@ -146,6 +146,9 @@ class Logger {
             });
             Logger.errorStack.push(this.path.join(` ${Logger.splitter} `), ...stringErrors);
         }
+        return this.error(...args);
+    }
+    error(...args) {
         return this.sailsLog("error", ...args);
     }
     warn(...args) {

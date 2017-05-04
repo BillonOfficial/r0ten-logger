@@ -172,7 +172,7 @@ export class Logger {
         return this.sailsLog("debug", ...args);
     }
 
-    public error(...args: any[]) {
+    public critical(...args: any[]) {
         if (Logger.config.emailErrors) {
             const stringErrors: string[] = _.map(args, (object: any) => {
                 if (typeof object !== "string") {
@@ -185,6 +185,10 @@ export class Logger {
             Logger.errorStack.push(this.path.join(` ${Logger.splitter} `), ...stringErrors);
         }
 
+        return this.error(...args);
+    }
+
+    public error(...args: any[]) {
         return this.sailsLog("error", ...args);
     }
 

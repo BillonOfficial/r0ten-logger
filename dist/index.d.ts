@@ -39,6 +39,7 @@ export declare class Logger {
     constructor(parent: Logger | string, child?: string);
     child(child: string): Logger;
     log(...args: any[]): this;
+    critical(...args: any[]): this;
     error(...args: any[]): this;
     warn(...args: any[]): this;
     debug(...args: any[]): this;
